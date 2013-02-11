@@ -1,0 +1,9 @@
+<br /><br />
+<div id="view-content">
+	<p><b>ALL POSTS</b></p>
+        
+        <?php foreach ($this->posts as $key => $value) {
+            echo $value->Post_Title. '<br>';
+            echo $value->Post_content. '<br><br>';
+        } ?>
+</div>

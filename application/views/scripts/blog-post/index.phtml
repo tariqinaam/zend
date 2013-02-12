@@ -1,4 +1,11 @@
-<br /><br />
+
 <div id="view-content">
-	<p>View script for controller <b>BlogPost</b> and script/action name <b>index</b></p>
+    <?php
+    foreach ($this->posts as $key => $value){?>
+    <b>Title :</b> <?php echo $value->Post_Title.'<br>'; ?>
+    <b>Author :</b> <?php echo $value->Post_Author . '<br>';?>
+    <b>Publish Date :</b> <?php echo $value->Post_Date . '<br>';?>
+    <b>Status :</b> <?php echo $value->Post_Status ? 'published' : 'draft'; ?> <br>
+    <?php echo $value->Post_content . '<br><br>';
+    }?> 
 </div>

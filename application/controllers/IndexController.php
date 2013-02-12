@@ -1,19 +1,15 @@
 <?php
 
-class IndexController extends Zend_Controller_Action
-{
+class IndexController extends Zend_Controller_Action {
 
-    public function init()
-    {
+    public function init() {
         /* Initialize action controller here */
-        $this->view->title = "Zend Quick Start";
     }
 
-    public function indexAction()
-    {
+    public function indexAction() {
         // action body
+        $this->view->accessDenied = $this->getParam('msg');
     }
 
-   
 }
 

@@ -16,8 +16,9 @@ class PostsController extends Zend_Controller_Action
     public function listAction()
     {
         $postsTBL = new Application_Model_Posts();
-        $this->view->posts = $postsTBL->fetchAll();
-        //var_dump($this->view->posts);
+        
+        $this->view->posts = $postsTBL->fetchAll($where="Post_Status=1");
+   
     }
     
 

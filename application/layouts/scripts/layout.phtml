@@ -1,29 +1,36 @@
-<?php echo $this->doctype; ?>
+<?php echo $this->doctype(); ?>
 <html>
-      <head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         <title><?php echo $this->title; ?></title>
     </head>
-<div id="container">
-	<div id="header">
-		<h1>
-			<?php echo $this->title; ?>
-		</h1>
-	</div>
-	<div id="navigation">
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="/User">User</a></li>
-			<li><a href="/posts">Posts</a></li>
-			<li><a href="/blogPost">My Posts</a></li>
-		</ul>
-	</div>
-	<div id="content">
-		 <?php echo $this->layout()->content; ?>
-	</div>
-	<div id="footer">
-		Copyright © Site name, 20XX
-	</div>
-</div>
+    <div id="container">
+        <div id="header">
+            <h1>
+                <?php echo $this->title; ?>
+            </h1>
+        </div>
+        <div id="navigation">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/User">User</a></li>
+                <li><a href="/posts">Posts</a></li>
+                <li><a href="/blogPost">My Posts</a></li>
+            </ul>
+        </div>
+        <div id="content-container">
+            <div id="content">
+                <?php echo $this->layout()->content; ?>
+            </div>
+            <div id="aside">
+                <?php //var_dump($this->navigation());exit; ?>
+                <?php echo $this->navigation(); ?>
+            </div>
+
+
+            <div id="footer">
+                Copyright © Site name, 20XX
+            </div>
+        </div>
 </html>

@@ -4,6 +4,11 @@
     {
         color: #0398CA;
     }
+    .error{
+        color: red;
+
+        font-size: 18px;
+    }
 
     span#zf-name
     {
@@ -27,7 +32,9 @@
         height: 100%;
     }
 </style>
+<p class="error"><?php echo $this->accessDenied; ?></p>
 <div id="welcome">
+
     <h1>Welcome to the <span id="zf-name">Zend Framework!</span></h1>
 
     <h3>This is your project's main page</h3>

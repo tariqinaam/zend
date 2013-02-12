@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <nav>
+        <home>
+            <label>Home</label>
+            <uri>/</uri>
+            <resource>index</resource>
+            <privilege>index</privilege>
+        </home>
+        <User>
+            <label>Member</label>
+            <controller>User</controller>
+            <action>index</action>
+            <resource>User</resource>
+            <privilege>index</privilege>
+            <pages>
+                <login>
+            <label>Log in</label>
+            <controller>User</controller>
+            <action>login</action>
+            <resource>User</resource>
+            <privilege>login</privilege>
+        </login>
+        
+        <register>
+            <label>Register</label>
+            <controller>User</controller>
+            <action>register</action>
+            <resource>User</resource>
+            <privilege>register</privilege>
+        </register>
+                
+        <logout>
+            <label>Logout</label>
+            <controller>User</controller>
+            <action>logout</action>
+            <resource>User</resource>
+            <privilege>logout</privilege>
+        </logout>
+            </pages>
+        </User>
+        
+        
+          
+        <posts>
+            <label>Posts</label>
+            <uri>#</uri>
+            <resource>posts</resource>
+            <privilege>index</privilege>
+            <pages>
+                <list>
+                    <label>All Posts</label>
+                    <controller>posts</controller>
+                    <action>list</action>
+                    <resource>posts</resource>
+                    <privilege>list</privilege>
+                </list>
+            </pages>
+        </posts>
+        
+        <blogPost>
+            <label>My Post</label>
+            <controller>blogPost</controller>
+            <action>index</action>
+            <resource>blogPost</resource>
+            <privilege>index</privilege>
+            <pages>
+                <add>
+                    <label>Add Post</label>
+                    <controller>blogPost</controller>
+                    <action>add</action>
+                    <resource>blogPost</resource>
+                    <privilege>add</privilege>
+                </add>
+                <edit>
+                    <label>Edit Post</label>
+                    <controller>blogPost</controller>
+                    <action>edit</action>
+                    <resource>blogPost</resource>
+                    <privilege>edit</privilege>
+                </edit>
+                <delete>
+                    <label>Delete Post</label>
+                    <controller>blogPost</controller>
+                    <action>delete</action>
+                    <resource>blogPost</resource>
+                    <privilege>delete</privilege>
+                </delete>
+            </pages>
+        </blogPost>
+       
+        
+    </nav>
+</root>

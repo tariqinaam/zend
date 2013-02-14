@@ -72,13 +72,7 @@
                     <resource>blogPost</resource>
                     <privilege>add</privilege>
                 </add>
-                <edit>
-                    <label>Edit Post</label>
-                    <controller>blogPost</controller>
-                    <action>edit</action>
-                    <resource>blogPost</resource>
-                    <privilege>edit</privilege>
-                </edit>
+                
                 <delete>
                     <label>Delete Post</label>
                     <controller>blogPost</controller>

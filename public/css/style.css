@@ -55,9 +55,9 @@
 {
 	clear: left;
 	float: left;
-	width: 560px;
-	padding: 20px 0;
-	margin: 0 0 0 30px;
+	width: 630px;
+	padding: 0px 0;
+	margin: 0 0 0 0px;
 	display: inline;
 }
 
@@ -84,4 +84,14 @@
 }
 #name-label, #email-label, #password-label, #cpassword-label{
     /*float:left;*/
+}
+#odd{
+    background-color: lightgray;
+    padding: 10px;
+}
+#even{
+    padding: 10px;
+}
+#breadcrumb{
+    margin-top: 45px;
 }

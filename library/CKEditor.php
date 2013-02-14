@@ -13,10 +13,8 @@ public function __construct($spec, $options = null)
        //grab a reference to the view rendering the form element
        $view = $this->getView();
        //include scripts and initialize the ckeditor
-       $view->headScript()->appendFile(
-     '/ckeditor/ckeditor.js',
-     'text/javascript'
-     );
+      echo $view->headScript()->appendFile('/ckeditor/ckeditor.js', 'text/javascript');
+       //var_dump($view->headScript()->appendFile('/ckeditor/ckeditor.js', 'text/javascript'));
        //give the textarea a class name that ckeditor recognises
        $this->setAttrib('class', 'ckeditor');
   }

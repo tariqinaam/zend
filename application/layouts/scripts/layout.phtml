@@ -4,7 +4,12 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         <title><?php echo $this->title; ?></title>
+         <?php echo $this->dojo();
+             echo $this->dojo()->addStylesheetModule('dijit.themes.tundra');
+
+       ?>
     </head>
+    <body class="tundra">
     <div id="container">
         <div id="header">
             <h1>
@@ -18,6 +23,9 @@
                 <li><a href="/posts">Posts</a></li>
                 <li><a href="/blogPost">My Posts</a></li>
             </ul>
+        </div>
+        <div id="breadcrumb">You are in: 
+            <?php echo $this->navigation()->breadcrumbs()->setLinkLast(false)->setMinDepth(0)->render();?>
         </div>
         <div id="content-container">
             <div id="content">
@@ -33,4 +41,6 @@
                 Copyright © Site name, 20XX
             </div>
         </div>
+    </div>
+    </body>
 </html>

@@ -32,11 +32,20 @@ class UserController extends Zend_Controller_Action {
         $users = new Application_Model_User();
         $form = new Application_Form_Register();
         $this->view->form = $form;
-
+       
         if ($this->getRequest()->isPost()) {
             $postData = $this->_request->getPost();
 
             if ($form->isValid($postData)) {
+                echo $email = $form->getValue('email');
+                $result = $users->select($where= "Email = '$email'" );
+               
+                var_dump($users->fetchAll($where= "Email = '$email'" ));exit;
+                if($result){
+                    echo "user already exist";
+                    
+                    return;
+                }
 
                 if ($postData['password'] != $postData['cpassword']) {
 

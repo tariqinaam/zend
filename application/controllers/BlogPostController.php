@@ -16,10 +16,21 @@ class BlogPostController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
-         $postsTBL = new Application_Model_Posts();
+        $postsTBL = new Application_Model_Posts();
+        $form = new Application_Form_Search();
+        $this->view->form = $form;
+        if($this->getRequest()->isPost()){
+            $sortData = $this->_request->getPost();
+            if($form->isValid($sortData)){
+                $column = $form->getValue('sort');
+             $result = $postsTBL->select($where="Author_Id= $this->_id" )->order($column.' desc');
+            }
+        }else{
+           
+         
          $this->view->posts = $postsTBL->fetchAll($where="Author_Id= $this->_id");
-         $result = $postsTBL->fetchAll($where="Author_Id= $this->_id");
+         $result = $postsTBL->select($where="Author_Id= $this->_id");
+        }
       /*if(isset($this->view->posts)){
           $this->view->emptyMsg = "You havn't created any post yet.";
       }*/

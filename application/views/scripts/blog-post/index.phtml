@@ -1,11 +1,18 @@
 
 <div id="view-content">
-    <p style="color: red"><?php echo $this->successMsg; echo $this->updateMsg;
+    <p style="color: red"><?php echo $this->successMsg; 
+    $msg = $this->msg;
+    foreach($msg as $msgValue)
+    {
+        echo $msgValue;
+    }
              echo $this->emptyMsg?>
     </p>
   
     <?php if($this->paginator): ?>
-    <div><?php echo $this->form ?></div>
+    <div class ="sort_area"><span class="sortlabel">Sort By: </span><?php echo $this->form->sort; 
+            echo $this->form->submit;
+            ?></div>
     <div>
        
             <?php $i = 1;?>
@@ -13,11 +20,11 @@
         <?php if($i%2 == 0){
             $className = "even";
         }else{
-            $className = "odd";;
+            $className = "odd";
         }
 ?>    
         <div id="<?php echo $className; ?>">
-            <div><b>Title :</b> <?=$row->Post_Title?><span style="float:right; color: blue"><a href ="/blogPost/edit?post_id=<?php echo $row->Post_Id;?>">edit</a></span></div>
+            <div><b>Title :</b> <a href="/blogPost/single?post_id=<?php echo $row->Post_Id?>"><?php echo $row->Post_Title?></a><span style="float:right; color: blue"><a href ="/blogPost/edit?post_id=<?php echo $row->Post_Id;?>">edit</a></span></div>
                 <b>Author :</b> <?php echo $row->Post_Author . '<br>';?>
                 <b>Publish Date :</b> <?php echo $row->Post_Date . '<br>';?>
                 <b>Status :</b> <?php echo $row->Post_Status ? 'published' : 'draft'; ?> <br>

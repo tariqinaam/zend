@@ -18,12 +18,14 @@
 	float: left;
 	width: 900px;
 	background: #333;
+        
 }
 
 #navigation ul
 {
 	margin: 0;
 	padding: 0;
+        
 }
 
 #navigation ul li
@@ -94,4 +96,12 @@
 }
 #breadcrumb{
     margin-top: 45px;
+    margin-left: 200px;
+}
+#top_menu{
+    font-size: 23px;
+    padding: 21px;
+}
+.active{
+    background-color: gray;
 }

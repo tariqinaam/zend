@@ -15,36 +15,40 @@
             <privilege>index</privilege>
             <pages>
                 <login>
-            <label>Log in</label>
-            <controller>User</controller>
-            <action>login</action>
-            <resource>User</resource>
-            <privilege>login</privilege>
-        </login>
+                    <label>Log in</label>
+                    <controller>User</controller>
+                    <action>login</action>
+                    <resource>User</resource>
+                    <privilege>login</privilege>
+                </login>
         
-        <register>
-            <label>Register</label>
-            <controller>User</controller>
-            <action>register</action>
-            <resource>User</resource>
-            <privilege>register</privilege>
-        </register>
+                <register>
+                    <label>Register</label>
+                    <controller>User</controller>
+                    <action>register</action>
+                    <resource>User</resource>
+                    <privilege>register</privilege>
+                </register>
                 
-        <logout>
-            <label>Logout</label>
-            <controller>User</controller>
-            <action>logout</action>
-            <resource>User</resource>
-            <privilege>logout</privilege>
-        </logout>
+                <logout>
+                    <label>Logout</label>
+                    <controller>User</controller>
+                    <action>logout</action>
+                    <resource>User</resource>
+                    <privilege>logout</privilege>
+                </logout>
+         
             </pages>
+           
+            
         </User>
         
         
           
         <posts>
             <label>Posts</label>
-            <uri>#</uri>
+            <controller>posts</controller>
+            <action>list</action>
             <resource>posts</resource>
             <privilege>index</privilege>
             <pages>
@@ -55,7 +59,17 @@
                     <resource>posts</resource>
                     <privilege>list</privilege>
                 </list>
+                 <single>
+                    <label></label>
+                    <controller>blogPost</controller>
+                    <action>single</action>
+                    <resource>posts</resource>
+                    <privilege>list</privilege>
+                </single>
             </pages>
+            
+               
+         
         </posts>
         
         <blogPost>

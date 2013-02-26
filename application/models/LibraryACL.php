@@ -11,6 +11,8 @@ class Application_Model_LibraryACL extends Zend_Acl {
 
 
         $this->add(new Zend_Acl_Resource('User'));
+        
+        //$this->add(new Zend_Acl_Resource('verify'), 'User');
         //$this->add(new Zend_Acl_Resource('login'), 'User');
         // $this->add(new Zend_Acl_Resource('logout'), 'User');
 
@@ -29,7 +31,8 @@ class Application_Model_LibraryACL extends Zend_Acl {
         $this->addRole(new Zend_Acl_Role('admin'), 'registered');
 
         $this->allow('guest', array('error', 'index', 'posts'));
-        $this->allow('guest', 'User', array('index', 'login', 'register'));
+        $this->allow('guest', 'User', array( 'index', 'login', 'verify', 'register'));
+        $this->allow('guest', 'blogPost', array('single'));
 
         $this->deny('registered', 'User', array('login', 'register'));
         $this->allow('registered', 'User', array('logout'));

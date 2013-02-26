@@ -1,5 +1,6 @@
 <br /><br />
 <div id="view-content">
 	<p><?php echo $this->errorMsg; echo $this->successMsg; ?></b></p>
+        <?php if(isset($_GET['successRegister'])){ echo "Thank you for registering, please verify your email address and then login.";}?>
         <?php echo $this->form ?>
 </div>

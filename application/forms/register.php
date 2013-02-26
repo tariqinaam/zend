@@ -12,6 +12,9 @@ class Application_Form_Register extends Zend_Form
         $emailValidate = new Zend_Validate_EmailAddress();
         $emailValidate->setMessage('email is not valid');
         
+        $alreadyExist = new Zend_Validate_Db_NoRecordExists('USers', 'email');
+        $alreadyExist->setMessage('email already exist, try forgot password');
+        
         $this->setMethod('post');
         
         $id = $this->createElement('hidden', 'id');
@@ -26,6 +29,7 @@ class Application_Form_Register extends Zend_Form
         $email->setLabel('Username')
                 ->setRequired(TRUE);
               //  ->setValidators(new Zend_Validate_EmailAddress);
+        $email->addValidator($alreadyExist , TRUE);
         $email->addValidator($notEmpty, TRUE);
         $email->addValidator($emailValidate, TRUE);
         //$email->getValidator('EmailAddress')->setMessage('invalid email address');

@@ -1,0 +1,14 @@
+<?php //echo '<ul id="nav1">';
+    // loop root level (only has Home, but later may have an Admin root page?)
+    //vdump($this);
+    foreach ($this->container as $page) {
+        // check if it is active (not recursive)
+        //vdump($page);
+        $isActive = $page->isActive(true);
+        $liClass = $isActive ? ' class="active"' : '';
+        echo '<span id="top_menu" '.$liClass . '>' . $this->menu()->htmlify($page) . '</span>', PHP_EOL;
+        // loop next level
+        
+    }
+    //echo '</ul>';
+    ?>

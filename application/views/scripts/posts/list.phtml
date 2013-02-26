@@ -2,8 +2,35 @@
 <div id="view-content">
 	<p><b>ALL POSTS</b></p>
         
-        <?php foreach ($this->posts as $key => $value) {
-            echo $value->Post_Title. '<br>';
-            echo $value->Post_content. '<br><br>';
-        } ?>
+      
+    <?php if($this->paginator): ?>
+     <div class ="sort_area"><span class="sortlabel">Sort By: </span><?php echo $this->form->sort; 
+            echo $this->form->submit;
+            ?></div>
+    
+    <div>
+       
+            <?php $i = 1;?>
+        <?php foreach($this->paginator AS $key => $row): ?>
+        <?php if($i%2 == 0){
+            $className = "even";
+        }else{
+            $className = "odd";;
+        }
+?>    
+        <div id="<?php echo $className; ?>">
+            <div><b>Title :</b> <?=$row->Post_Title?><span style="float:right; color: blue"><a href ="/blogPost/edit?post_id=<?php echo $row->Post_Id;?>">edit</a></span></div>
+                <b>Author :</b> <?php echo $row->Post_Author . '<br>';?>
+                <b>Publish Date :</b> <?php echo $row->Post_Date . '<br>';?>
+                <b>Status :</b> <?php echo $row->Post_Status ? 'published' : 'draft'; ?> <br>
+                <div> <b>Content :</b><?=$row->Post_content?></div><br><br>
+            </div>
+        <?php $i++; ?>
+        <?php endforeach; ?>
+    </div>
+    <?php echo $this->paginator; ?>
+<?php else: ?>
+No results.
+<?php endif; ?>
+    
 </div>

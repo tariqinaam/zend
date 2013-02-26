@@ -1,0 +1,18 @@
+<?php //error_reporting(0);?>
+<div id="view-content">
+    <p style="color: red"><?php echo $this->successMsg; ?>
+    
+    </p>
+
+  <?php foreach($this->post as $row){?>
+   <div id="odd">
+            <div><b>Title :</b> <?=$row->Post_Title?><span style="float:right; color: blue"></span></div>
+                <b>Author :</b> <?php echo $row->Post_Author . '<br>';?>
+                <b>Publish Date :</b> <?php echo $row->Post_Date . '<br>';?>
+                <b>Status :</b> <?php echo $row->Post_Status ? 'published' : 'draft'; ?> <br>
+                <div> <b>Content :</b><?=$row->Post_content?></div><br><br>
+            </div>
+  <?php }
+   ?> 
+   
+</div>

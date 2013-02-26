@@ -16,7 +16,7 @@ class Application_Form_Post extends ZendX_JQuery_Form
         
         //$id = $this->createElement('hidden', 'Id');
         
-         $name = $this->createElement('text', 'Post_Title');
+        $name = $this->createElement('text', 'Post_Title');
         $name->setLabel('Title')
                 ->setRequired(TRUE)
               
@@ -24,6 +24,14 @@ class Application_Form_Post extends ZendX_JQuery_Form
         
         $publishDate = new Zend_Dojo_Form_Element_DateTextBox('Post_Date');
         $publishDate->setLabel('Publish Date');
+        
+        $category = $this->createElement('select', 'category1');
+        $category->setLabel('Category')
+                ->addValidator($notEmpty, TRUE);
+        
+        $subcategory = $this->createElement('select', 'category2');
+        $subcategory->setLabel('Sub Category')
+                ->addValidator($notEmpty, TRUE);
         
         
         $editor = new CKEditor('Post_content', array('required'=>true, 'label'=>'Content'));
@@ -52,6 +60,8 @@ class Application_Form_Post extends ZendX_JQuery_Form
              $name,
            $postStatus,
              $publishDate,
+             $category,
+             $subcategory,
              $editor,
             $submit
             ));

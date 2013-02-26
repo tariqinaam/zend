@@ -60,6 +60,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function _initDbugLoad() {
         //$this->bootstrap('')
         Zend_Loader::loadFile('dBug.php', $dirs = 'library', $once = false);
+        Zend_Loader::loadFile('debug.php', $dirs = 'library', $once = FALSE);
         Zend_Loader::loadFile('CKEditor.php', $dirs = 'library');
         $this->bootstrap('autoload');
         $view = new Zend_View();

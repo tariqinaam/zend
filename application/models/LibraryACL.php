@@ -36,7 +36,7 @@ class Application_Model_LibraryACL extends Zend_Acl {
 
         $this->deny('registered', 'User', array('login', 'register'));
         $this->allow('registered', 'User', array('logout'));
-        $this->allow('registered', 'blogPost', array('index', 'add', 'edit'));
+        $this->allow('registered', 'blogPost', array('index', 'add', 'edit', 'subcategory'));
 
 
         $this->allow('admin', 'blogPost', 'delete');

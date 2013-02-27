@@ -1,6 +1,7 @@
 <?php echo $this->doctype(); ?>
 <html>
     <head>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         <link href="/style.css" rel="stylesheet" type="text/css" />
@@ -10,7 +11,7 @@
         echo $this->dojo()->addStylesheetModule('dijit.themes.tundra');
         ?>
     </head>
-    <body>
+    <body onload="init()">
 
         <div id="topheader">
             <div class="logo"></div>

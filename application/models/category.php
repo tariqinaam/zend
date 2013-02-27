@@ -14,7 +14,7 @@ class Application_Model_Category extends Zend_Db_Table_Abstract {
     public function getSubCategories($ParentId){
         
         $categories = $this->fetchAll("parentId=" .$ParentId);
-        $result = $categories->toArray();
+       $result = $categories->toArray();
         
         return $result;
     }

@@ -19,13 +19,11 @@ class BlogPostController extends Zend_Controller_Action {
     private $_id;
     private $_name;
     protected $_successMsg;
-    
+
     public function init() {
         /* get currently logged in user id and its name from storage */
         $this->_id = Zend_Auth::getInstance()->getStorage()->read()->Id;
         $this->_name = Zend_Auth::getInstance()->getStorage()->read()->Name;
-        
-
     }
 
     /*
@@ -84,38 +82,68 @@ class BlogPostController extends Zend_Controller_Action {
         }
     }
 
+    public function subcategoryAction() {
+
+        $category = new Application_Model_Category();
+        if (isset($_GET['action']) && $_GET['action'] == "complete") {
+
+            $ParentId = $_GET['ParentId'];
+        } else {
+            $ParentId = 1;
+        }
+        $subcat_result = $category->getSubCategories($ParentId);
+        $tmp = array();
+        foreach ($subcat_result as $key => $value) {
+            $tmp[$key] = $value;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($tmp);
+
+        exit();
+    }
+
     //add a new blog post 
     public function addAction() {
         $blogpost = new Application_Model_Posts();
         $form = new Application_Form_Post();
         $categoryModel = new Application_Model_Category();
         $result = $categoryModel->getCategories();
-        
+
         //$getCategories = $result->toArray();
-        foreach($result as $key => $value){
-            
-        $form->getElement('category1')
-                ->addMultiOptions(array($value['CategoryId'] => $value['CategoryName']));
+        foreach ($result as $key => $value) {
+
+            $form->getElement('category1')
+                    ->addMultiOptions(array($value['CategoryId'] => $value['CategoryName']));
         }
-        
-        $ParentId = $form->getElement('category1')->getValue();
-        
-        $subcat_result = $categoryModel->getSubCategories(1);
-        
-        foreach ($subcat_result as $key => $value) {
+
+        $subcat = $categoryModel->getSubCategories(1);
+        foreach ($subcat as $key => $value) {
             $form->getElement('category2')
                     ->addMultiOptions(array($value['CategoryId'] => $value['CategoryName']));
         }
-        
+
         $this->view->form = $form;
         //check if it is post request. i.e ideally call when user fill all data and press submit
         if ($this->getRequest()->isPost()) {
             $postData = $this->_request->getPost();
-            //var_dump($postData);exit;
+           // vdump($postData);
+          //  exit;
+            $temp = array();
+            $temp1 = array();
+            foreach ($postData as $key => $value) {
+                if($key == 'category1' || $key == 'category2' || $key == 'category3'){
+                 $temp1[] = $value;    
+                }else{
+                $temp[$key] = $value;
+                }
+            }
+            $comma_separated[Category_Id] = implode(",", $temp1);
+            $temp += $comma_separated; 
+            unset($temp['submit']);
+            if ($form->isValid($temp)) {
 
-            if ($form->isValid($postData)) {
-
-                $formData = $form->getValues();
+                $formData = $temp;
+               
                 //add author id, and author name taken from registry
                 $formData += array('Author_Id' => $this->_id, 'Post_Author' => $this->_name);
                 //insert record into db.
@@ -157,9 +185,9 @@ class BlogPostController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             //get post data
             $postData = $this->_request->getPost();
-           
+
             if ($form->isValid($postData)) {
-                
+
                 $formData = $form->getValues();
                 //set post id for where clause
                 $where1 = array("Post_Id = $post_id");
@@ -173,20 +201,19 @@ class BlogPostController extends Zend_Controller_Action {
             }
         }
     }
-    
-    public function singleAction(){
-       $blogpost = new Application_Model_Posts();
-       $post_id =  $_GET['post_id'];
-       
-        
+
+    public function singleAction() {
+        $blogpost = new Application_Model_Posts();
+        $post_id = $_GET['post_id'];
+
+
         if ($post_id) {
             //get row from db where matching post and author id
-            $result = $blogpost->fetchAll($where = "Post_Id=" .$post_id);
+            $result = $blogpost->fetchAll($where = "Post_Id=" . $post_id);
 
             if ($result) {
-                $result1= $result->toArray();
-               $this->view->post = $result;
-               
+                $result1 = $result->toArray();
+                $this->view->post = $result;
             } else {
                 echo "you are not authorized";
             }

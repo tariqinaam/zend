@@ -25,12 +25,17 @@ class Application_Form_Post extends ZendX_JQuery_Form
         $publishDate = new Zend_Dojo_Form_Element_DateTextBox('Post_Date');
         $publishDate->setLabel('Publish Date');
         
-        $category = $this->createElement('select', 'category1');
+        $category = $this->createElement('select', 'category1', array('onChange' => 'getSubcategory()'));
         $category->setLabel('Category')
+                ->addValidator($notEmpty, TRUE)
+                ;
+        
+        $subcategory = $this->createElement('select', 'category2', array('onChange' => 'getSubcategory1()'));
+        $subcategory->setLabel('Sub Category')
                 ->addValidator($notEmpty, TRUE);
         
-        $subcategory = $this->createElement('select', 'category2');
-        $subcategory->setLabel('Sub Category')
+        $subcategory1 = $this->createElement('select', 'category3');
+        $subcategory1->setLabel('Sub Category')
                 ->addValidator($notEmpty, TRUE);
         
         
@@ -62,6 +67,7 @@ class Application_Form_Post extends ZendX_JQuery_Form
              $publishDate,
              $category,
              $subcategory,
+             $subcategory1,
              $editor,
             $submit
             ));

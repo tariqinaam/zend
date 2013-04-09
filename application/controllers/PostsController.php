@@ -58,6 +58,15 @@ class PostsController extends Zend_Controller_Action {
             //Zend_View_Helper_PaginationControl::setDefaultViewPartial($partial)
         }
     }
+    
+    public function categoryfilterAction(){
+      $categoryTBL = new Application_Model_Category();
+      
+      $result = $categoryTBL->fetchAll($where = "ParentId=0");
+      
+      $this->view->category = $result;
+        
+    }
 
 }
 

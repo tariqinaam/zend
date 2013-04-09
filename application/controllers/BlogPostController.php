@@ -82,9 +82,12 @@ class BlogPostController extends Zend_Controller_Action {
         }
     }
 
+    //Action to get subcategory. mainly used by ajax request. and it echo sub categories as json.
     public function subcategoryAction() {
 
         $category = new Application_Model_Category();
+
+        //check if it is get request, then set parent category, otherwise first item is parent category
         if (isset($_GET['action']) && $_GET['action'] == "complete") {
 
             $ParentId = $_GET['ParentId'];
@@ -93,12 +96,14 @@ class BlogPostController extends Zend_Controller_Action {
         }
         $subcat_result = $category->getSubCategories($ParentId);
         $tmp = array();
+        //get only data we needed.
         foreach ($subcat_result as $key => $value) {
             $tmp[$key] = $value;
         }
+        //set header and convert array into json object
         header('Content-Type: application/json');
         echo json_encode($tmp);
-
+        //exit here, otherwise it will return all html markup too.
         exit();
     }
 
@@ -107,43 +112,53 @@ class BlogPostController extends Zend_Controller_Action {
         $blogpost = new Application_Model_Posts();
         $form = new Application_Form_Post();
         $categoryModel = new Application_Model_Category();
-        $result = $categoryModel->getCategories();
+        
 
-        //$getCategories = $result->toArray();
+        //get the parent category and add it to form select box
+        $result = $categoryModel->getCategories();
         foreach ($result as $key => $value) {
 
             $form->getElement('category1')
                     ->addMultiOptions(array($value['CategoryId'] => $value['CategoryName']));
         }
-
+        
+        //get subcategory and add it to form
         $subcat = $categoryModel->getSubCategories(1);
         foreach ($subcat as $key => $value) {
             $form->getElement('category2')
                     ->addMultiOptions(array($value['CategoryId'] => $value['CategoryName']));
         }
-
+        
+        //assign form to view.
         $this->view->form = $form;
         //check if it is post request. i.e ideally call when user fill all data and press submit
         if ($this->getRequest()->isPost()) {
             $postData = $this->_request->getPost();
-           // vdump($postData);
-          //  exit;
+            
+            
+            //  get post data 
             $temp = array();
             $temp1 = array();
+            
+            //seperate category and other data in two different arrays
             foreach ($postData as $key => $value) {
-                if($key == 'category1' || $key == 'category2' || $key == 'category3'){
-                 $temp1[] = $value;    
-                }else{
-                $temp[$key] = $value;
+                if ($key == 'category1' || $key == 'category2' || $key == 'category3') {
+                    $temp1[] = $value;
+                } else {
+                    $temp[$key] = $value;
                 }
             }
+            //convert category array into single csv array value
             $comma_separated[Category_Id] = implode(",", $temp1);
-            $temp += $comma_separated; 
+            
+            //combine two arrays.
+            $temp += $comma_separated;
             unset($temp['submit']);
+            
             if ($form->isValid($temp)) {
 
                 $formData = $temp;
-               
+
                 //add author id, and author name taken from registry
                 $formData += array('Author_Id' => $this->_id, 'Post_Author' => $this->_name);
                 //insert record into db.
@@ -222,6 +237,8 @@ class BlogPostController extends Zend_Controller_Action {
             echo "url is not valid";
         }
     }
+
+    
 
     public function deleteAction() {
         
